@@ -11,4 +11,5 @@ services:
   - postgresql
 script:
   - pwd
+  - cd Pure_Beurre/substitute/&&pytest project_tester/
   - ./Pure_Beurre/manage.py tests
