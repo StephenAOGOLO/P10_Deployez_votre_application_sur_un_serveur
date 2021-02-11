@@ -2,6 +2,7 @@ language: python
 python:
   - "3.8"
 before_script:
+  - chmod +x ./Pure_Beurre/manage.py
   - pip install -r requirements.txt
 branches:
   only:
@@ -9,4 +10,5 @@ branches:
 services:
   - postgresql
 script:
-  - manage.py tests
+  - pwd
+  - ./Pure_Beurre/manage.py tests
