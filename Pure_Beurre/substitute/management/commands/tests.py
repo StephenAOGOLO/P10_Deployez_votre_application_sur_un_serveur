@@ -6,7 +6,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
-            shell_script()
+            native_shell_script()
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
@@ -18,6 +18,8 @@ def shell_script():
     subprocess.call([r'start_test.sh'])
 
 def native_shell_script():
+    os.system("coverage run --source='.' manage.py test substitute.project_tester.tests.TestViewsUnlogged")
     os.system("coverage run --source='.' manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
     os.system("start substitute\project_tester\coverage_html\index.html")
+
