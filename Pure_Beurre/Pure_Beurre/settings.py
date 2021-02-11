@@ -13,6 +13,19 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 from pathlib import Path
 import Pure_Beurre.the_secrets as tst
 import os
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+# Sentry configurations
+sentry_sdk.init(
+    dsn="https://e676a5c6788848648c538b327734b0c6@o520694.ingest.sentry.io/5631401",
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -132,3 +145,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 20000
+
