@@ -6,4 +6,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         subprocess.call([r'start_test.bat'])
+        subprocess.call([r'start_test.sh'])
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
