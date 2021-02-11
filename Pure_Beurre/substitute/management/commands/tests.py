@@ -21,5 +21,6 @@ def native_shell_script():
     os.system("./Pure_Beurre/manage.py test ./Pure_Beurre/substitute/project_tester/tests.py")
     os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
+    os.system("sensible-browser substitute\project_tester\coverage_html\index.html")
     os.system("start substitute\project_tester\coverage_html\index.html")
 
