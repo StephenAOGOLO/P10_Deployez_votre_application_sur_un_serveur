@@ -12,6 +12,23 @@ from django.test import TestCase, SimpleTestCase, Client
 class TestViewsUnlogged(TestCase):
     def setUp(self):
         self.c = Client()
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.an_aliment = Aliment.objects.create(name="an_aliment")
         self.another_aliment = Aliment.objects.create(name="another_aliment")
         self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
