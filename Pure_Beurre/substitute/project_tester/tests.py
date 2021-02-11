@@ -632,7 +632,7 @@ class TestOperations(TestCase):
         self.an_aliment = Aliment.objects.create(name="an_aliment", category=self.a_category.name)
         self.an_aliment.tag.add(self.a_category)
         self.text = "text"
-        self.min_urls_unix = "/substitute/static/substitute/json/min_urls.json"
+        self.min_urls_unix = "/static/substitute/json/min_urls.json"
         self.min_urls_win = ".\\substitute\\static\\substitute\\json\\min_urls.json"
 
 
@@ -673,7 +673,7 @@ class TestOperations(TestCase):
 
 
     def test_Data(self):
-        if os.name is "nt":
+        if os.name == "nt":
             result = Data(self.min_urls_win)
         else:
             result = Data(self.min_urls_unix)
