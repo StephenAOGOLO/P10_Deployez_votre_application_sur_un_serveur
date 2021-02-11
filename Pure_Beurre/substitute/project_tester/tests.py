@@ -680,7 +680,7 @@ class TestOperations(TestCase):
         size_aliment_before = len(Aliment.objects.all())
         size_category_before = len(Category.objects.all())
         data = result.big_data
-        print(data)
+        #print(data)
         fill_category(data)
         fill_aliment(data)
         size_aliment_after = len(Aliment.objects.all())

@@ -10,6 +10,23 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         cls.a_user_clear_password = "selenium.1234"
         cls.a_user_chrome = User.objects.create_user(username="chrome_user", email="chrome_user@purebeurre.com", password=cls.a_user_clear_password)
         cls.a_user_chrome.save()
@@ -62,6 +79,23 @@ class SeleniumTestsOpera(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         cls.a_user_clear_password = "user.1234"
         cls.a_user_opera = User.objects.create_user(username="opera_user", email="opera_user@purebeurre.com", password=cls.a_user_clear_password)
         cls.a_user_opera.save()
@@ -115,6 +149,23 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         cls.selenium.get(cls.live_server_url)
 
@@ -135,6 +186,23 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         cls.a_user_clear_password = "error.1234"
         cls.a_user_opera = User.objects.create_user(username="user_error_500", email="user_error_500@purebeurre.com", password=cls.a_user_clear_password)
         cls.a_user_opera.save()
