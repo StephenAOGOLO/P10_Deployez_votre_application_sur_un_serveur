@@ -18,8 +18,8 @@ def shell_script():
     subprocess.call([r'start_test.sh'])
 
 def native_shell_script():
-    os.system("manage.py test ./Pure_Beurre/substitute/project_tester/tests.py")
-    os.system("coverage run --source='.' manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
+    os.system("./Pure_Beurre/manage.py test ./Pure_Beurre/substitute/project_tester/tests.py")
+    os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
     os.system("start substitute\project_tester\coverage_html\index.html")
 
