@@ -1,4 +1,4 @@
-from substitute import views
+from Pure_Beurre.substitute import views
 from substitute.operations import *
 from django.conf.urls import handler404, handler500
 from django.contrib.auth.models import User
