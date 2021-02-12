@@ -61,6 +61,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
+        print(cls.live_server_url + "/substitute/home/")
 
     @classmethod
     def tearDownClass(cls):
