@@ -16,7 +16,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
     def setUpClass(cls):
         print("SETUP")
         super().setUpClass()
-        cls.text_page = Text.objects.create(
+        cls.text_page = Text(
             language="fr",
             mentions_title = "title",
             mentions_id_fn = "mentions_id_fn",
@@ -33,6 +33,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             home_c = "home_c",
             home_bm = "home_bm",
         )
+        cls.text_page.save()
         cls.a_user_clear_password = "selenium.1234"
         cls.a_user_chrome = User.objects.create_user(username="chrome_user", email="chrome_user@purebeurre.com", password=cls.a_user_clear_password)
         cls.a_user_chrome.save()
@@ -82,6 +83,8 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     def test_login(self):
         print("LOGIN")
+        response = self.selenium.get(cls.live_server_url + "/substitute/home/")
+        self.assertEqual(response.status_code, 200)
         time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("login").click()
