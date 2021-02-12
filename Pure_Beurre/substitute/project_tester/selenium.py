@@ -5,6 +5,8 @@ from selenium.webdriver.opera.webdriver import WebDriver as wdo
 from substitute.operations import *
 import time, os
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
@@ -35,7 +37,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         if os.name == 'nt':
             cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.selenium = wdc(executable_path="./project_tester/chromedriver")
+            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'))
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
@@ -107,7 +109,7 @@ class SeleniumTestsOpera(StaticLiveServerTestCase):
         if os.name == 'nt':
             cls.selenium = wdo(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\operadriver_win64\\operadriver.exe")
         else:
-            cls.selenium = wdo(executable_path="./project_tester/operadriver_linux64/operadriver")
+            cls.selenium = wdo(executable_path=os.path.join(BASE_DIR, 'project_tester/operadriver_linux64/operadriver'))
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
@@ -176,7 +178,7 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
             cls.selenium = wdc(
                 executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.selenium = wdc(executable_path="./project_tester/chromedriver")
+            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'))
         cls.selenium.get(cls.live_server_url)
 
     @classmethod
@@ -220,7 +222,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             cls.selenium = wdc(
                 executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.selenium = wdc(executable_path="./project_tester/chromedriver")
+            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'))
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
     @classmethod
