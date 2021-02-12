@@ -3,7 +3,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
 from substitute.operations import *
-import time
+import time, os
 
 
 class SeleniumTestsChrome(StaticLiveServerTestCase):
@@ -32,7 +32,10 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         cls.a_user_chrome.save()
         cls.a_customer_chrome = Customer(user=cls.a_user_chrome)
         cls.a_customer_chrome.save()
-        cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        if os.name == 'nt':
+            cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        else:
+            cls.selenium = wdc(executable_path="/project_tester/chromedriver")
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
@@ -101,7 +104,10 @@ class SeleniumTestsOpera(StaticLiveServerTestCase):
         cls.a_user_opera.save()
         cls.a_customer_opera = Customer(user=cls.a_user_opera)
         cls.a_customer_opera.save()
-        cls.selenium = wdo(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\operadriver_win64\\operadriver.exe")
+        if os.name == 'nt':
+            cls.selenium = wdo(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\operadriver_win64\\operadriver.exe")
+        else:
+            cls.selenium = wdo(executable_path="/project_tester/operadriver_linux64/operadriver")
         cls.selenium.implicitly_wait(10)
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
@@ -166,7 +172,11 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
             home_c = "home_c",
             home_bm = "home_bm",
         )
-        cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        if os.name == 'nt':
+            cls.selenium = wdc(
+                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        else:
+            cls.selenium = wdc(executable_path="/project_tester/chromedriver")
         cls.selenium.get(cls.live_server_url)
 
     @classmethod
@@ -204,9 +214,13 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             home_bm = "home_bm",
         )
         cls.a_user_clear_password = "error.1234"
-        cls.a_user_opera = User.objects.create_user(username="user_error_500", email="user_error_500@purebeurre.com", password=cls.a_user_clear_password)
-        cls.a_user_opera.save()
-        cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        cls.a_user_chrome = User.objects.create_user(username="user_error_500", email="user_error_500@purebeurre.com", password=cls.a_user_clear_password)
+        cls.a_user_chrome.save()
+        if os.name == 'nt':
+            cls.selenium = wdc(
+                executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
+        else:
+            cls.selenium = wdc(executable_path="/project_tester/chromedriver")
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
 
     @classmethod
@@ -226,7 +240,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             main_url + reverse("substitute:login")
         )
         username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys(self.a_user_opera.username)
+        username_input.send_keys(self.a_user_chrome.username)
         time.sleep(2)
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys(self.a_user_clear_password)
