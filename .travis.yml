@@ -18,5 +18,7 @@ services:
   - postgresql
 script:
   - pwd
+  - google-chrome --version
+  - whereis google-chrome
   - ./Pure_Beurre/manage.py tests
   - exit
