@@ -75,22 +75,22 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
     def test_login(self):
-        time.sleep(2)
+        #time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("login").click()
-        time.sleep(2)
+        #time.sleep(2)
         self.assertEqual(
             self.selenium.current_url,
             main_url + reverse("substitute:login")
         )
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys(self.a_user_chrome.username)
-        time.sleep(2)
+        #time.sleep(2)
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys(self.a_user_clear_password)
-        time.sleep(2)
+        #time.sleep(2)
         self.selenium.find_element_by_class_name("connect-user").click()
-        time.sleep(2)
+        #time.sleep(2)
         main_url = self.live_server_url
         self.assertEqual(
             self.selenium.current_url,
