@@ -43,11 +43,13 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         else:
 
             cls.wdc_options = webdriver.ChromeOptions()
-            cls.wdc_options.add_argument('headless')
+            cls.wdc_options.add_argument('--headless')
+            cls.wdc_options.add_argument('--disable-gpu')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
             cls.wdc_options.add_argument('--no-sandbox')
             cls.wdc_options.add_argument('--remote-debugging-port=9222')
+            cls.wdc_options.add_argument('http://localhost')
             print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
             #cls.wdc_options.add_argument('headless')
