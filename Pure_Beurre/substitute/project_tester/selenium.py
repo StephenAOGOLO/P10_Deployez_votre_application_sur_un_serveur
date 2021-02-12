@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
-        print("SETUP")
+        print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text(
             language="fr",
@@ -60,12 +60,12 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
-        print("TEARDOWN")
+        print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_logout(self):
-        print("LOGOUT")
+        print("\nLOGOUT\n")
         time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("logout").click()
@@ -76,7 +76,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
     def test_login(self):
-        print("LOGIN")
+        print("\nLOGIN\n")
         time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("login").click()
@@ -100,9 +100,10 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
 
-class SeleniumTestsError400(StaticLiveServerTestCase):
+class SeleniumTestsError404(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
+        print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text(
             language="fr",
@@ -135,18 +136,19 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
             cls.wdc_options.add_argument('--no-sandbox')
             cls.wdc_options.add_argument('--remote-debugging-port=9222')
             cls.wdc_options.add_argument('http://localhost')
-            print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
 
         cls.selenium.get(cls.live_server_url)
 
     @classmethod
     def tearDownClass(cls):
+        print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
 
 
     def test_404(self):
+        print("\nTEST 404\n")
         time.sleep(2)
         alert = self.selenium.find_element_by_id("404-area")
         self.assertEqual(alert.find_element_by_tag_name("h1").text,
@@ -156,6 +158,7 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
 class SeleniumTestsError500(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
+        print("\nSETUP\n")
         super().setUpClass()
         cls.text_page = Text(
             language="fr",
@@ -191,7 +194,6 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             cls.wdc_options.add_argument('--no-sandbox')
             cls.wdc_options.add_argument('--remote-debugging-port=9222')
             cls.wdc_options.add_argument('http://localhost')
-            print(cls.wdc_options.arguments)
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
 
 
@@ -199,10 +201,12 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
+        print("\nTEARDOWN\n")
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_500(self):
+        print("\nTEST 500\n")
         time.sleep(2)
         self.selenium.get('%s%s' % (self.live_server_url, "/substitute/home/"))
         time.sleep(2)
