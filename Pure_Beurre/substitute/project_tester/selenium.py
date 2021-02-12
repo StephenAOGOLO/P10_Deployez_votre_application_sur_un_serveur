@@ -2,12 +2,12 @@ from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
+from selenium.webdriver.chrome import options as opt
 from substitute.operations import *
 from pathlib import Path
 import time, os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
@@ -38,7 +38,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         if os.name == 'nt':
             cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.wdc_options = wdc.ChromeOptions()
+            cls.wdc_options = opt
             cls.wdc_options.add_argument('headless')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
@@ -186,7 +186,7 @@ class SeleniumTestsError400(StaticLiveServerTestCase):
             cls.selenium = wdc(
                 executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.wdc_options = wdc.ChromeOptions()
+            cls.wdc_options = opt
             cls.wdc_options.add_argument('headless')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
@@ -237,7 +237,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             cls.selenium = wdc(
                 executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
-            cls.wdc_options = wdc.ChromeOptions()
+            cls.wdc_options = opt
             cls.wdc_options.add_argument('headless')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
