@@ -16,24 +16,24 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
     def setUpClass(cls):
         print("\nSETUP\n")
         super().setUpClass()
-        cls.text_page = Text(
-            language="fr",
-            mentions_title = "title",
-            mentions_id_fn = "mentions_id_fn",
-            mentions_id_ln = "mentions_id_ln",
-            mentions_id_ph = "mentions_id_ph",
-            mentions_id_m = "mentions_id_m",
-            mentions_id_pn = "mentions_id_pn",
-            mentions_id_s = "mentions_id_s",
-            mentions_a_rcs = "mentions_a_rcs",
-            mentions_a_fn = "mentions_a_fn",
-            mentions_a_cgv = "mentions_a_cgv",
-            mentions_cookies = "mentions_cookies",
-            home_s = "home_s",
-            home_c = "home_c",
-            home_bm = "home_bm",
-        )
-        cls.text_page.save()
+        #cls.text_page = Text(
+        #    language="fr",
+        #    mentions_title = "title",
+        #    mentions_id_fn = "mentions_id_fn",
+        #    mentions_id_ln = "mentions_id_ln",
+        #    mentions_id_ph = "mentions_id_ph",
+        #    mentions_id_m = "mentions_id_m",
+        #    mentions_id_pn = "mentions_id_pn",
+        #    mentions_id_s = "mentions_id_s",
+        #    mentions_a_rcs = "mentions_a_rcs",
+        #    mentions_a_fn = "mentions_a_fn",
+        #    mentions_a_cgv = "mentions_a_cgv",
+        #    mentions_cookies = "mentions_cookies",
+        #    home_s = "home_s",
+        #    home_c = "home_c",
+        #    home_bm = "home_bm",
+        #)
+        #cls.text_page.save()
         cls.a_user_clear_password = "selenium.1234"
         cls.a_user_chrome = User.objects.create_user(username="chrome_user", email="chrome_user@purebeurre.com", password=cls.a_user_clear_password)
         cls.a_user_chrome.save()
