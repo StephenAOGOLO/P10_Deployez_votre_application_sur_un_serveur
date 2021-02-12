@@ -13,3 +13,4 @@ services:
 script:
   - pwd
   - ./Pure_Beurre/manage.py tests
+  - exit

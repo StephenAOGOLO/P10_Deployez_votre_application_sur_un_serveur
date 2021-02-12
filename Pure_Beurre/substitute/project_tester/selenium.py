@@ -3,6 +3,7 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
 from substitute.operations import *
+from pathlib import Path
 import time, os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
