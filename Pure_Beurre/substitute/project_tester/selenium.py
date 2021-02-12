@@ -46,6 +46,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             cls.wdc_options = webdriver.ChromeOptions()
             cls.wdc_options.add_argument('--headless')
             cls.wdc_options.add_argument('--disable-gpu')
+            cls.wdc_options.add_argument('--window-size=1280x1696')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
             cls.wdc_options.add_argument('--no-sandbox')
