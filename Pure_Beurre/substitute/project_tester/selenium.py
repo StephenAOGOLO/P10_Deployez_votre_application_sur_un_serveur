@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 class SeleniumTestsChrome(StaticLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
+        print("SETUP")
         super().setUpClass()
         cls.text_page = Text.objects.create(
             language="fr",
@@ -61,10 +62,12 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     @classmethod
     def tearDownClass(cls):
+        print("TEARDOWN")
         cls.selenium.quit()
         super().tearDownClass()
 
     def test_logout(self):
+        print("LOGOUT")
         time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("logout").click()
@@ -75,22 +78,23 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
         )
 
     def test_login(self):
-        #time.sleep(2)
+        print("LOGIN")
+        time.sleep(2)
         main_url = self.live_server_url
         self.selenium.find_element_by_class_name("login").click()
-        #time.sleep(2)
+        time.sleep(2)
         self.assertEqual(
             self.selenium.current_url,
             main_url + reverse("substitute:login")
         )
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys(self.a_user_chrome.username)
-        #time.sleep(2)
+        time.sleep(2)
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys(self.a_user_clear_password)
-        #time.sleep(2)
+        time.sleep(2)
         self.selenium.find_element_by_class_name("connect-user").click()
-        #time.sleep(2)
+        time.sleep(2)
         main_url = self.live_server_url
         self.assertEqual(
             self.selenium.current_url,
