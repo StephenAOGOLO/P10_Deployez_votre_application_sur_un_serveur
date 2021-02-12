@@ -83,7 +83,7 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
 
     def test_login(self):
         print("LOGIN")
-        response = self.selenium.get(cls.live_server_url + "/substitute/home/")
+        response = self.selenium.get(self.live_server_url + "/substitute/home/")
         self.assertEqual(response.status_code, 200)
         time.sleep(2)
         main_url = self.live_server_url
