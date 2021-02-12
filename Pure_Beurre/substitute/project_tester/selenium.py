@@ -2,7 +2,8 @@ from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
-from selenium.webdriver.chrome.options import Options as opt
+from selenium import webdriver
+#from selenium.webdriver.chrome.options import Options as opt
 #from selenium.webdriver.chrome import options as opt
 from substitute.operations import *
 from pathlib import Path
@@ -40,8 +41,9 @@ class SeleniumTestsChrome(StaticLiveServerTestCase):
             cls.selenium = wdc(executable_path="D:\\STEPHEN_AO\\05_THE_PYTHON_APPLICATION_DEVELOPER\\PROJECTS\\08_Creez_une_plateforme_pour_amateur_de_nutella\\projet\\P8_1.1\\Pure_Beurre\\substitute\\project_tester\\chromedriver.exe")
         else:
 
-            cls.wdc_options = opt
-            cls.wdc_options.headless = True
+            cls.wdc_options = webdriver.ChromeOptions()
+            cls.wdc_options.add_argument("headless")
+            #cls.wdc_options.headless = True
             cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
             #cls.wdc_options.add_argument('headless')
             #cls.wdc_options.add_argument('--disable-infobars')
