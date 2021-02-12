@@ -6,6 +6,7 @@ from selenium import webdriver
 #from selenium.webdriver.chrome.options import Options as opt
 #from selenium.webdriver.chrome import options as opt
 from substitute.operations import *
+from substitute.models import *
 from pathlib import Path
 import time, os
 
