@@ -149,12 +149,15 @@ class SeleniumTestsError404(StaticLiveServerTestCase):
             cls.wdc_options = webdriver.ChromeOptions()
             cls.wdc_options.add_argument('--headless')
             cls.wdc_options.add_argument('--disable-gpu')
+            cls.wdc_options.add_argument('--window-size=1280x1696')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
             cls.wdc_options.add_argument('--no-sandbox')
             cls.wdc_options.add_argument('--remote-debugging-port=9222')
             cls.wdc_options.add_argument('http://localhost')
-            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
+            print(cls.wdc_options.arguments)
+            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'),
+                               options=cls.wdc_options)
 
         cls.selenium.get(cls.live_server_url)
 
@@ -207,12 +210,15 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
             cls.wdc_options = webdriver.ChromeOptions()
             cls.wdc_options.add_argument('--headless')
             cls.wdc_options.add_argument('--disable-gpu')
+            cls.wdc_options.add_argument('--window-size=1280x1696')
             cls.wdc_options.add_argument('--disable-infobars')
             cls.wdc_options.add_argument('--disable-dev-shm-usage')
             cls.wdc_options.add_argument('--no-sandbox')
             cls.wdc_options.add_argument('--remote-debugging-port=9222')
             cls.wdc_options.add_argument('http://localhost')
-            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'), options=cls.wdc_options)
+            print(cls.wdc_options.arguments)
+            cls.selenium = wdc(executable_path=os.path.join(BASE_DIR, 'project_tester/chromedriver'),
+                               options=cls.wdc_options)
 
 
         cls.selenium.get('%s%s' % (cls.live_server_url, "/substitute/home/"))
