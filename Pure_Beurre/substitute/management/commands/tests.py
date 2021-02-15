@@ -7,6 +7,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
             all_tests()
+            coverage_report()
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
