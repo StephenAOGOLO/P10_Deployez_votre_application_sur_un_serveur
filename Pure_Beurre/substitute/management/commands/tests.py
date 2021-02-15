@@ -8,7 +8,7 @@ class Command(BaseCommand):
         try:
             all_tests()
             coverage_report()
-            exit_process()
+            #exit_process()
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
@@ -41,5 +41,5 @@ def coverage_report():
 
 
 def exit_process():
-    #os.system("exit&&quit&&q")
+    os.system("exit&&quit&&q")
 
