@@ -232,9 +232,8 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
 
     def test_all_pages(self):
         print("\nTEST ALL PAGES\n")
-        for url in urlpatterns:
-            response = self.selenium.get(reverse(url.name))
-            self.assertEqual(response.status_code, 200)
+        response = self.selenium.get(reverse(substitute.views.handler500))
+        self.assertEqual(response.status_code, 200)
 
     #def test_500(self):
     #    print("\nTEST 500\n")
