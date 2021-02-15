@@ -1,4 +1,5 @@
 from django.urls import reverse
+from substitute.urls import urlpatterns
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
@@ -229,29 +230,35 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_500(self):
-        print("\nTEST 500\n")
-        time.sleep(2)
-        self.selenium.get('%s%s' % (self.live_server_url, "/substitute/home/"))
-        time.sleep(2)
-        main_url = self.live_server_url
-        self.selenium.find_element_by_class_name("login").click()
-        time.sleep(2)
-        self.assertEqual(
-            self.selenium.current_url,
-            main_url + reverse("substitute:login")
-        )
-        username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys(self.a_user_chrome.username)
-        time.sleep(2)
-        password_input = self.selenium.find_element_by_name("password")
-        password_input.send_keys(self.a_user_clear_password)
-        time.sleep(2)
-        self.selenium.find_element_by_class_name("connect-user").click()
-        time.sleep(2)
-        alert = self.selenium.find_element_by_id("500-area")
-        self.assertEqual(alert.find_element_by_tag_name("h1").text,
-                         "Nous avons un problème interne !!!!")
+    def test_all_pages(self):
+        print("\nTEST ALL PAGES\n")
+        for url in urlpatterns:
+            response = self.selenium.get(reverse(url.name))
+            self.assertEqual(response.status_code, 200)
+
+    #def test_500(self):
+    #    print("\nTEST 500\n")
+    #    time.sleep(2)
+    #    self.selenium.get('%s%s' % (self.live_server_url, "/substitute/home/"))
+    #    time.sleep(2)
+    #    main_url = self.live_server_url
+    #    self.selenium.find_element_by_class_name("login").click()
+    #    time.sleep(2)
+    #    self.assertEqual(
+    #        self.selenium.current_url,
+    #        main_url + reverse("substitute:login")
+    #    )
+    #    username_input = self.selenium.find_element_by_name("username")
+    #    username_input.send_keys(self.a_user_chrome.username)
+    #    time.sleep(2)
+    #    password_input = self.selenium.find_element_by_name("password")
+    #    password_input.send_keys(self.a_user_clear_password)
+    #    time.sleep(2)
+    #    self.selenium.find_element_by_class_name("connect-user").click()
+    #    time.sleep(2)
+    #    alert = self.selenium.find_element_by_id("500-area")
+    #    self.assertEqual(alert.find_element_by_tag_name("h1").text,
+    #                     "Nous avons un problème interne !!!!")
 
 
 #class SeleniumTestsOpera(StaticLiveServerTestCase):
