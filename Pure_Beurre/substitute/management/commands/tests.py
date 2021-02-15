@@ -35,5 +35,10 @@ def selenium_tests():
 
 def coverage_report():
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
-    os.system("sensible-browser ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
+    #os.system("sensible-browser ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
+    os.system("xdg-open ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
+
+
+def exit_process():
+    os.system("exit&&quit&&q")
 
