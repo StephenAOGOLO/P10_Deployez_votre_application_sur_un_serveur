@@ -8,6 +8,7 @@ class Command(BaseCommand):
         try:
             all_tests()
             coverage_report()
+            exit_process()
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
@@ -36,9 +37,9 @@ def selenium_tests():
 def coverage_report():
     os.system("coverage html --skip-covered --skip-empty -d substitute\project_tester\coverage_html")
     #os.system("sensible-browser ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
-    os.system("xdg-open ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
+    #os.system("xdg-open ./Pure_Beurre/substitute/project_tester/coverage_html/index.html")
 
 
 def exit_process():
-    os.system("exit&&quit&&q")
+    #os.system("exit&&quit&&q")
 
