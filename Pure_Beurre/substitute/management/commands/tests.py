@@ -6,7 +6,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
-            selenium_tests()
+            all_tests()
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la campagne de tests..."))
