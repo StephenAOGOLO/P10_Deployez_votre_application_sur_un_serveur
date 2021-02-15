@@ -1,5 +1,4 @@
 from django.urls import reverse
-from substitute.urls import urlpatterns
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.chrome.webdriver import WebDriver as wdc
 from selenium.webdriver.opera.webdriver import WebDriver as wdo
@@ -232,7 +231,7 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
 
     def test_all_pages(self):
         print("\nTEST ALL PAGES\n")
-        response = self.selenium.get(reverse(substitute.views.handler500))
+        response = self.selenium.get(reverse(views.handler500))
         self.assertEqual(response.status_code, 200)
 
     #def test_500(self):
