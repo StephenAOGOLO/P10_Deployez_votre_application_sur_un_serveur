@@ -229,11 +229,6 @@ class SeleniumTestsError500(StaticLiveServerTestCase):
         cls.selenium.quit()
         super().tearDownClass()
 
-    def test_all_pages(self):
-        print("\nTEST ALL PAGES\n")
-        response = self.selenium.get(reverse(views.handler500))
-        self.assertEqual(response.status_code, 200)
-
     #def test_500(self):
     #    print("\nTEST 500\n")
     #    time.sleep(2)
