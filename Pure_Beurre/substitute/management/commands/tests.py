@@ -7,7 +7,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la campagne de tests..."))
         try:
-            all_tests()
+            all_tests(os.name)
             coverage_report()
         except Exception as e:
             print(e)
@@ -21,8 +21,11 @@ def shell_script():
     subprocess.call([r'start_test.sh'])
 
 
-def all_tests():
-    os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
+def all_tests(os_name):
+    if os_name == 'nt':
+        os.system("coverage run --source='.' manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
+    else:
+        os.system("coverage run --source='.' ./Pure_Beurre/manage.py test substitute.project_tester.selenium substitute.project_tester.tests")
 
 
 def units_tests():

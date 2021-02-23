@@ -39,9 +39,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = tst.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["206.189.30.229"]
+if DEBUG:
+    ALLOWED_HOSTS = ["127.0.0.1"]
+else:
+    ALLOWED_HOSTS = ["206.189.30.229"]
 
 
 # Application definition
@@ -53,7 +56,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
+    'dbbackup',
     'substitute',
+]
+
+# Backup DataBase Configurations
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
+
+# Cyclic tasks Configurations
+CRONJOBS = [
+    #('0 3 * * 7', 'substitute.cron.weekly_dbupdate'),
+    ('*/2 * * * *', 'substitute.cron.two_minutes_dbupdate')
 ]
 
 MIDDLEWARE = [
@@ -89,30 +104,41 @@ WSGI_APPLICATION = 'Pure_Beurre.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'purebeurre_db',
+            'USER': 'stephen',
+            'PASSWORD': 'stephen',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#        'NAME': 'purebeurre',
-#        'USER': 'purebeurre',
-#        'PASSWORD': 'purebeurreoc',
-#        'HOST': 'localhost',
-#        'PORT': '',
-#    }
-#}
-
-# This database configuration is used by Travis
-DATABASES = {
-    'default': {
-        #'ENGINE': 'django.db.backends.postgresql',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'purebeurre',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    },
-}
+    #DATABASES = {
+    #    'default': {
+    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #        'NAME': 'purebeurre',
+    #        'USER': 'purebeurre',
+    #        'PASSWORD': 'purebeurreoc',
+    #        'HOST': 'localhost',
+    #        'PORT': '',
+    #    }
+    #}
+else:
+    # This database configuration is used by Travis
+    DATABASES = {
+        'default': {
+            #'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'purebeurre',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+        },
+    }
 
 
 # Password validation
