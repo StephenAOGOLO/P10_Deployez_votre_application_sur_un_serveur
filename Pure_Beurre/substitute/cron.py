@@ -32,5 +32,9 @@ def cron_logger():
         new_file.write(line)
     new_file.close
     """
+    now = time.localtime()
+    when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
+    print("Tentative de création du dossier \n{} à {}".format(BASE_DIR + "/CRON_LOGS/", when_happens))
     path_log = BASE_DIR + "/CRON_LOGS/"
     os.mkdir(path_log)
+    print("Fin de tentative de création du dossier \n{} il est {}".format(BASE_DIR + "/CRON_LOGS/", when_happens))
