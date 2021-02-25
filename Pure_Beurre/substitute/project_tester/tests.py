@@ -4,6 +4,7 @@ from django.conf.urls import handler404, handler500
 from django.contrib.auth.models import User
 from django.urls import reverse, resolve
 from django.test import TestCase, SimpleTestCase, Client
+import os
 
 
 # Create your tests here.
@@ -12,6 +13,23 @@ from django.test import TestCase, SimpleTestCase, Client
 class TestViewsUnlogged(TestCase):
     def setUp(self):
         self.c = Client()
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.an_aliment = Aliment.objects.create(name="an_aliment")
         self.another_aliment = Aliment.objects.create(name="another_aliment")
         self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
@@ -197,6 +215,23 @@ class TestViewsUnlogged(TestCase):
 class TestViewsLogged(TestCase):
     def setUp(self):
         self.c = Client()
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.an_aliment = Aliment.objects.create(name="an_aliment")
         self.another_aliment = Aliment.objects.create(name="another_aliment")
         self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
@@ -503,6 +538,23 @@ class TestUrls(SimpleTestCase):
 class TestModels(TestCase):
     def setUp(self):
         self.c = Client()
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.a_category = Category.objects.create(name="a_category")
         self.another_category = Category.objects.create(name="another_category")
         self.an_aliment = Aliment.objects.create(name="an_aliment")
@@ -555,6 +607,23 @@ class TestModels(TestCase):
 class TestOperations(TestCase):
     def setUp(self):
         self.c = Client()
+        self.text_page = Text.objects.create(
+            language="fr",
+            mentions_title = "title",
+            mentions_id_fn = "mentions_id_fn",
+            mentions_id_ln = "mentions_id_ln",
+            mentions_id_ph = "mentions_id_ph",
+            mentions_id_m = "mentions_id_m",
+            mentions_id_pn = "mentions_id_pn",
+            mentions_id_s = "mentions_id_s",
+            mentions_a_rcs = "mentions_a_rcs",
+            mentions_a_fn = "mentions_a_fn",
+            mentions_a_cgv = "mentions_a_cgv",
+            mentions_cookies = "mentions_cookies",
+            home_s = "home_s",
+            home_c = "home_c",
+            home_bm = "home_bm",
+        )
         self.a_user = User.objects.create_user(username="a_user", email="a_user@purebeurre.com", password="user.1234")
         self.a_customer = Customer(user=self.a_user)
         self.a_customer.save()
@@ -563,6 +632,9 @@ class TestOperations(TestCase):
         self.an_aliment = Aliment.objects.create(name="an_aliment", category=self.a_category.name)
         self.an_aliment.tag.add(self.a_category)
         self.text = "text"
+        self.min_urls_unix = "/static/substitute/json/min_urls.json"
+        self.min_urls_win = ".\\substitute\\static\\substitute\\json\\min_urls.json"
+
 
     def test_DataSearch(self):
         result = DataSearch(self.text)
@@ -601,11 +673,14 @@ class TestOperations(TestCase):
 
 
     def test_Data(self):
-        result = Data(".\\substitute\\static\\substitute\\json\\min_urls.json")
+        if os.name == "nt":
+            result = Data(self.min_urls_win)
+        else:
+            result = Data(self.min_urls_unix)
         size_aliment_before = len(Aliment.objects.all())
         size_category_before = len(Category.objects.all())
         data = result.big_data
-        print(data)
+        #print(data)
         fill_category(data)
         fill_aliment(data)
         size_aliment_after = len(Aliment.objects.all())

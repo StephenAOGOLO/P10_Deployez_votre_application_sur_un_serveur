@@ -47,13 +47,26 @@ ALLOWED_HOSTS = ["206.189.30.229"]
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'dbbackup',
     'substitute',
+]
+
+# Backup DataBase Configurations
+DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
+DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
+
+# Cyclic tasks Configurations
+CRONJOBS = [
+    ('*/2 * * * *', 'substitute.cron.cyclic_dbupdate'),
+    #('0 3 * * 7', 'substitute.cron.cyclic_dbupdate'),
+    #('*/1 * * * *', 'substitute.cron.tests_dbupdate')
 ]
 
 MIDDLEWARE = [
