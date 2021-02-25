@@ -1,6 +1,6 @@
 from django.core.management import call_command
 from pathlib import Path
-import time
+import time, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,6 +19,7 @@ def tests_dbupdate():
         print(e)
 
 def cron_logger():
+    """
     path_log = BASE_DIR + "/CRON_LOGS/"
     name_log = "chronic_log"
     extension = "txt"
@@ -30,3 +31,6 @@ def cron_logger():
     for line in content:
         new_file.write(line)
     new_file.close
+    """
+    path_log = BASE_DIR + "/CRON_LOGS/"
+    os.mkdir(path_log)
