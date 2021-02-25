@@ -5,6 +5,7 @@ python:
   - "3.8"
 addons:
   chrome: stable
+
 before_script:
   - chmod +x ./Pure_Beurre/manage.py
   - chmod +x ./Pure_Beurre/substitute/project_tester/chromedriver
@@ -13,12 +14,26 @@ before_script:
   - psql -c 'create database purebeurre;' -U postgres
 branches:
   only:
-    - main
+    - stagging
 services:
   - postgresql
 script:
   - pwd
   - google-chrome --version
   - whereis google-chrome
-  - ./Pure_Beurre/manage.py tests
-  - exit
+  - ./Pure_Beurre/manage.py makemigrations
+  - ./Pure_Beurre/manage.py migrate
+  #- ./Pure_Beurre/manage.py tests
+  - ./Pure_Beurre/manage.py crontab add
+  - ./Pure_Beurre/manage.py crontab show
+  #- cat ./CRON_LOGS/chronic_log.txt
+  - ls ./Pure_Beurre
+  - ls ./Pure_Beurre/Pure_Beurre
+  - ls ./Pure_Beurre/substitute
+  - sleep 3m
+  #- cat ./CRON_LOGS/chronic_log.txt
+  - ls ./Pure_Beurre
+  - ls ./Pure_Beurre/Pure_Beurre
+  - ls ./Pure_Beurre/substitute
+  - ./Pure_Beurre/manage.py crontab remove
+  - ./Pure_Beurre/manage.py crontab show
