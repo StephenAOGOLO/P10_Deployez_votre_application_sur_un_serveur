@@ -26,6 +26,8 @@ script:
   - ./Pure_Beurre/manage.py tests
   - ./Pure_Beurre/manage.py crontab add
   - ./Pure_Beurre/manage.py crontab show
-  - sleep 4m
+  - cat ./CRON_LOGS/chronic_log.txt
+  - sleep 2m
+  - cat ./CRON_LOGS/chronic_log.txt
   - ./Pure_Beurre/manage.py crontab remove
   - ./Pure_Beurre/manage.py crontab show

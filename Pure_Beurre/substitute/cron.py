@@ -9,7 +9,7 @@ def weekly_dbupdate():
   pass
 
 
-def two_minutes_dbupdate():
+def tests_dbupdate():
     try:
         cron_logger()
         #print("Lancement de la mise à jour de la base de données...")
@@ -24,8 +24,9 @@ def cron_logger():
     extension = "txt"
     now = time.localtime()
     when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
-    content = "cron task ==> " + when_happens
-    new_file = open(path_log+"//"+name_log+"_"+when_happens+"."+extension, "wt")
+    content = ["cron task ==> " + when_happens, ]
+    #new_file = open(path_log+name_log+"_"+when_happens+"."+extension, "wt")
+    new_file = open(path_log+name_log+"."+extension, "wt")
     for line in content:
         new_file.write(line)
     new_file.close

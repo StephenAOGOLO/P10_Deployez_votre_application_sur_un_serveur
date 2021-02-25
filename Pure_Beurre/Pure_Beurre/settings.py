@@ -68,7 +68,7 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 # Cyclic tasks Configurations
 CRONJOBS = [
     #('0 3 * * 7', 'substitute.cron.weekly_dbupdate'),
-    ('*/2 * * * *', 'substitute.cron.two_minutes_dbupdate')
+    ('*/1 * * * *', 'substitute.cron.tests_dbupdate')
 ]
 
 MIDDLEWARE = [
