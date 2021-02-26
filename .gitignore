@@ -1,4 +1,5 @@
 # created by virtualenv automatically
+/.idea
 /venv
 /pyvenv.cfg
 /Lib
@@ -9,5 +10,3 @@ Cahier_des_charges.pdf
 /starter.bat
 /Pure_Beurre/.coverage
 /requirements_auto.txt
-
-
