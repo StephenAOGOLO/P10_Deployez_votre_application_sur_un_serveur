@@ -41,7 +41,10 @@ SECRET_KEY = tst.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["206.189.30.229"]
+if DEBUG:
+    ALLOWED_HOSTS = ["127.0.0.1"]
+else:
+    ALLOWED_HOSTS = ["206.189.30.229"]
 
 
 # Application definition
@@ -64,7 +67,7 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 
 # Cyclic tasks Configurations
 CRONJOBS = [
-    ('*/2 * * * *', 'substitute.cron.cyclic_dbupdate'),
+    ('00 */2 * * *', 'substitute.cron.cyclic_dbupdate'),
     #('0 3 * * 7', 'substitute.cron.cyclic_dbupdate'),
     #('*/1 * * * *', 'substitute.cron.tests_dbupdate')
 ]
@@ -102,17 +105,61 @@ WSGI_APPLICATION = 'Pure_Beurre.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'purebeurre',
-        'USER': 'purebeurre',
-        'PASSWORD': 'purebeurreoc',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'purebeurre_db',
+            'USER': 'stephen',
+            'PASSWORD': 'stephen',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
     }
-}
+
+    #DATABASES = {
+    #    'default': {
+    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #        'NAME': 'purebeurre',
+    #        'USER': 'purebeurre',
+    #        'PASSWORD': 'purebeurreoc',
+    #        'HOST': 'localhost',
+    #        'PORT': '',
+    #    }
+    #}
+else:
+    if os.name == 'posix':
+        try:
+            if os.uname().nodename == 'django-s-1vcpu-1gb-lon1-01':
+                # This database configuration is used by Digital Ocean
+                DATABASES = {
+                    'default': {
+                        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                        'NAME': 'purebeurre',
+                        'USER': 'purebeurre',
+                        'PASSWORD': 'purebeurreoc',
+                        'HOST': 'localhost',
+                        'PORT': '',
+                    }
+                }
+        except Exception as e:
+            print(e)
+
+    # This database configuration is used by Travis
+    DATABASES = {
+        'default': {
+            #'ENGINE': 'django.db.backends.postgresql',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'purebeurre',
+            'USER': 'postgres',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+        },
+    }
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -155,7 +202,4 @@ STATICFILES_DIRS = [("substitute/static"),]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-
-
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 20000
-
