@@ -50,13 +50,13 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_crontab',
     'dbbackup',
     'substitute',
 ]
@@ -67,8 +67,9 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 
 # Cyclic tasks Configurations
 CRONJOBS = [
-    #('0 3 * * 7', 'substitute.cron.weekly_dbupdate'),
-    ('*/1 * * * *', 'substitute.cron.tests_dbupdate')
+    ('00 */2 * * *', 'substitute.cron.cyclic_dbupdate'),
+    #('0 3 * * 7', 'substitute.cron.cyclic_dbupdate'),
+    #('*/1 * * * *', 'substitute.cron.tests_dbupdate')
 ]
 
 MIDDLEWARE = [
@@ -127,6 +128,23 @@ if DEBUG:
     #    }
     #}
 else:
+    if os.name == 'posix':
+        try:
+            if os.uname().nodename == 'django-s-1vcpu-1gb-lon1-01':
+                # This database configuration is used by Digital Ocean
+                DATABASES = {
+                    'default': {
+                        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                        'NAME': 'purebeurre',
+                        'USER': 'purebeurre',
+                        'PASSWORD': 'purebeurreoc',
+                        'HOST': 'localhost',
+                        'PORT': '',
+                    }
+                }
+        except Exception as e:
+            print(e)
+
     # This database configuration is used by Travis
     DATABASES = {
         'default': {
@@ -139,6 +157,8 @@ else:
             'PORT': '',
         },
     }
+
+
 
 
 # Password validation

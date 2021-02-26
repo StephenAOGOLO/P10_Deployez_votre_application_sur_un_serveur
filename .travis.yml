@@ -23,17 +23,7 @@ script:
   - whereis google-chrome
   - ./Pure_Beurre/manage.py makemigrations
   - ./Pure_Beurre/manage.py migrate
+  - ./Pure_Beurre/manage.py environs
   #- ./Pure_Beurre/manage.py tests
-  - ./Pure_Beurre/manage.py crontab add
-  - ./Pure_Beurre/manage.py crontab show
-  #- cat ./CRON_LOGS/chronic_log.txt
-  - ls ./Pure_Beurre
-  - ls ./Pure_Beurre/Pure_Beurre
-  - ls ./Pure_Beurre/substitute
-  - sleep 3m
-  #- cat ./CRON_LOGS/chronic_log.txt
-  - ls ./Pure_Beurre
-  - ls ./Pure_Beurre/Pure_Beurre
-  - ls ./Pure_Beurre/substitute
-  - ./Pure_Beurre/manage.py crontab remove
-  - ./Pure_Beurre/manage.py crontab show
+
+
