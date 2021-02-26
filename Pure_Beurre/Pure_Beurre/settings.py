@@ -146,17 +146,17 @@ else:
             print(e)
 
     # This database configuration is used by Travis
-    DATABASES = {
-        'default': {
-            #'ENGINE': 'django.db.backends.postgresql',
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'purebeurre',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
-        },
-    }
+    #DATABASES = {
+    #    'default': {
+    #        #'ENGINE': 'django.db.backends.postgresql',
+    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #        'NAME': 'purebeurre',
+    #        'USER': 'postgres',
+    #        'PASSWORD': '',
+    #        'HOST': '',
+    #        'PORT': '',
+    #    },
+    #}
 
 
 
