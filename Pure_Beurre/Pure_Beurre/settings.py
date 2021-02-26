@@ -116,17 +116,6 @@ if DEBUG:
             'PORT': '5432',
         }
     }
-
-    #DATABASES = {
-    #    'default': {
-    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #        'NAME': 'purebeurre',
-    #        'USER': 'purebeurre',
-    #        'PASSWORD': 'purebeurreoc',
-    #        'HOST': 'localhost',
-    #        'PORT': '',
-    #    }
-    #}
 else:
     if 'travis' in platform.uname().node:
         # This database configuration is used by Travis
@@ -153,9 +142,6 @@ else:
                 'PORT': '',
             }
         }
-
-
-
 
 
 # Password validation

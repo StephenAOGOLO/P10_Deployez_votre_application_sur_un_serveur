@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import platform
 
 class Command(BaseCommand):
-    print("\nDescription technique de l'environnement informatique -> \n")
+    print("\nDescription technique de l'environnement informatique ->")
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS(info_system()))
         self.stdout.write(self.style.SUCCESS(info_nodename()))
