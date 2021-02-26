@@ -11,10 +11,10 @@ class Command(BaseCommand):
 
 
 def info_system():
-    return "System : " + str(platform.uname().sysname)
+    return "System : " + str(platform.uname().system)
 
 def info_nodename():
-    return "Nodename : " + str(platform.uname().nodename)
+    return "Nodename : " + str(platform.uname().node)
 
 def info_release():
     return "Release : " + str(platform.uname().release)
