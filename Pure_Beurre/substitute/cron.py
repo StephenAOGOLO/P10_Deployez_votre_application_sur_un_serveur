@@ -24,37 +24,6 @@ def cyclic_dbupdate():
         print(e)
 
 
-#def tests_dbupdate():
-#    try:
-#        cron_logger()
-#        #print("Lancement de la mise à jour de la base de données...")
-#        #call_command('fillDB')
-#        #print("Fin de la mise à jour de la base de données...")
-#    except Exception as e:
-#        print(e)
-#
-#def cron_logger():
-#    """
-#    path_log = BASE_DIR + "/CRON_LOGS/"
-#    name_log = "chronic_log"
-#    extension = "txt"
-#    now = time.localtime()
-#    when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
-#    content = ["cron task ==> " + when_happens, ]
-#    #new_file = open(path_log+name_log+"_"+when_happens+"."+extension, "wt")
-#    new_file = open(path_log+name_log+"."+extension, "wt")
-#    for line in content:
-#        new_file.write(line)
-#    new_file.close
-#    """
-#    now = time.localtime()
-#    when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
-#    print("Tentative de création du dossier \n{} à {}".format(BASE_DIR + "/CRON_LOGS/", when_happens))
-#    path_log = BASE_DIR + "/CRON_LOGS/"
-#    os.mkdir(path_log)
-#    print("Fin de tentative de création du dossier \n{} il est {}".format(BASE_DIR + "/CRON_LOGS/", when_happens))
-
-
 def log_it(path_log="./CRON_LOGS/", filename="cron_event", extension="txt", content=None):
     if content is None:
         content = ["vide\n"]
