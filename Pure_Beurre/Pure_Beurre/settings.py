@@ -66,10 +66,11 @@ DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 
 # Cyclic tasks Configurations
+# 00 */2 * * * => At every 2nd hour
+# 0 3 * * 0 => At 03:00 every Sunday
 CRONJOBS = [
     ('00 */2 * * *', 'substitute.cron.cyclic_dbupdate'),
-    #('0 3 * * 7', 'substitute.cron.cyclic_dbupdate'),
-    #('*/1 * * * *', 'substitute.cron.tests_dbupdate')
+    ('0 3 * * 0', 'substitute.cron.cyclic_dbupdate'),
 ]
 
 MIDDLEWARE = [
