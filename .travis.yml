@@ -25,5 +25,6 @@ script:
   - ./Pure_Beurre/manage.py migrate
   - ./Pure_Beurre/manage.py environs
   - ./Pure_Beurre/manage.py tests
+  - ./Pure_Beurre/manage.py all_aliments
 
 
