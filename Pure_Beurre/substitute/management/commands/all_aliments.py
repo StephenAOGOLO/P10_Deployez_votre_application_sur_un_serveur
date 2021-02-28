@@ -5,5 +5,5 @@ class Command(BaseCommand):
     print("Consultation des aliments de la base de donnees")
 
     def handle(self, *args, **options):
-        quantity = len(Aliment.objects.all())
+        quantity = Aliment.objects.all().count()
         self.stdout.write(self.style.SUCCESS("La base de donnees contient {} aliments".format(quantity)))

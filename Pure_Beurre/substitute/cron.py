@@ -42,3 +42,4 @@ def log_it(path_log="./CRON_LOGS/", filename="cron_event", extension="txt", cont
 def log_content(start_time, stop_time, event):
     event += "\n"
     return [start_time + " : Debut de " + event, stop_time + " : Fin de " + event]
+
