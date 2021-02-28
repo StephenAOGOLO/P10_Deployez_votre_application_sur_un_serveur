@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import Pure_Beurre.the_secrets as tst
-import os
+import os, platform
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -116,49 +116,32 @@ if DEBUG:
             'PORT': '5432',
         }
     }
-
-    #DATABASES = {
-    #    'default': {
-    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #        'NAME': 'purebeurre',
-    #        'USER': 'purebeurre',
-    #        'PASSWORD': 'purebeurreoc',
-    #        'HOST': 'localhost',
-    #        'PORT': '',
-    #    }
-    #}
 else:
-    if os.name == 'posix':
-        try:
-            if os.uname().nodename == 'django-s-1vcpu-1gb-lon1-01':
-                # This database configuration is used by Digital Ocean
-                DATABASES = {
-                    'default': {
-                        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                        'NAME': 'purebeurre',
-                        'USER': 'purebeurre',
-                        'PASSWORD': 'purebeurreoc',
-                        'HOST': 'localhost',
-                        'PORT': '',
-                    }
-                }
-        except Exception as e:
-            print(e)
-
-    # This database configuration is used by Travis
-    DATABASES = {
-        'default': {
-            #'ENGINE': 'django.db.backends.postgresql',
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'purebeurre',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
-        },
-    }
-
-
+    if 'travis' in platform.uname().node:
+        # This database configuration is used by Travis
+        DATABASES = {
+            'default': {
+                # 'ENGINE': 'django.db.backends.postgresql',
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'purebeurre',
+                'USER': 'postgres',
+                'PASSWORD': '',
+                'HOST': '',
+                'PORT': '',
+            },
+        }
+    elif platform.uname().node == 'django-s-1vcpu-1gb-lon1-01':
+        # This database configuration is used by Digital Ocean
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'purebeurre',
+                'USER': 'purebeurre',
+                'PASSWORD': 'purebeurreoc',
+                'HOST': 'localhost',
+                'PORT': '',
+            }
+        }
 
 
 # Password validation

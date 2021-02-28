@@ -23,6 +23,9 @@ def cyclic_dbupdate():
 def tests_dbupdate():
     try:
         cron_logger()
+        #print("Lancement de la mise à jour de la base de données...")
+        #call_command('fillDB')
+        #print("Fin de la mise à jour de la base de données...")
     except Exception as e:
         print(e)
 
