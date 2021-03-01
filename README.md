@@ -14,11 +14,11 @@ Ces derniers sont testés sur le navigateur Chrome.
 
 # Déploiement
 Le déploiement s'effectue en ligne de commandes, après la validation de l'intégration continue.  
-La version finale du site est donc rappatriée depuis la branche [master](https://github.com/StephenAOGOLO/P10_Deployez_votre_application_sur_un_serveur/tree/master) du repo vers le serveur hébergé (Digital Ocean).  
+La version définitive du site est donc rapatriée depuis la branche [master](https://github.com/StephenAOGOLO/P10_Deployez_votre_application_sur_un_serveur/tree/master) du repo vers le serveur hébergé (Digital Ocean).  
 
 # Monitoring
 La surveillance du site est assurée par Sentry, Supervisor et le tableau de bord de Digital Ocean.
-Chaque service remplit une fonction particulière, ce qui les rendent complémentaires.
+Chaque service remplit une fonction particulière, ce qui les rende complémentaires.
 
 ## Sentry  
 Sentry est une plateforme web permettant de concentrer et afficher les évènements et erreurs
@@ -39,9 +39,13 @@ La mise à jour régulière de la base de données.
 ## Cron
 Le module Crontab permet de planifier des exécutions.
 La mise à jour de la base de données ainsi que l'enregistrement d'un journal d'évènement ont été planifiés.
-Ces exécutions sont lancés une fois par semaine, le dimanche à 3h du matin.
+Ces exécutions sont lancées une fois par semaine, le dimanche à 3 h du matin.
+Pour des raisons de tests, une seconde planification a été enregistrée pour une fréquence élevée : toutes les 10 minutes.
+Cette dernière planification est désactivée lors du fonctionnement nominal du site.
 
-
+## Gestion de Projet
+Ce projet a été mené selon une méthodologie agile.  
+Sa planification est disponible via ce [Trello](https://trello.com/invite/b/WWwBu9OI/e1362a48cbb7a1812f1cb8f9a348c779/p10deployezvotreapplicationsurunserveur)
 # Trello
 En Cours...
 

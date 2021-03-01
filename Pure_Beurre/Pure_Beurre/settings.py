@@ -71,8 +71,8 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 # */2 * * * * => Every two minutes
 # */10 * * * * => Every ten minutes
 CRONJOBS = [
-    ('0 3 * * 0', 'django.core.management.call_command', '[fillDB]'),
-    ('*/10 * * * *', 'django.core.management.call_command', '[updateDB]'),
+    ('0 3 * * 0', 'django.core.management.call_command', ['fillDB']),
+    ('*/10 * * * *', 'django.core.management.call_command', ['updateDB']),
 ]
 
 
