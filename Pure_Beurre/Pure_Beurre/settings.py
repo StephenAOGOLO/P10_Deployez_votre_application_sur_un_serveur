@@ -68,10 +68,13 @@ DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 # Cyclic tasks Configurations
 # 00 */2 * * * => At every 2nd hour
 # 0 3 * * 0 => At 03:00 every Sunday
+# */2 * * * * => Every two minutes
+# */10 * * * * => Every ten minutes
 CRONJOBS = [
-    ('00 */2 * * *', 'substitute.cron.cyclic_dbupdate'),
-    ('0 3 * * 0', 'substitute.cron.cyclic_dbupdate'),
+    ('0 3 * * 0', 'django.core.management.call_command', '[fillDB]'),
+    ('*/10 * * * *', 'django.core.management.call_command', ['updateDB']),
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
