@@ -12,6 +12,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write(self.style.SUCCESS("Lancement de la mise à jour automatique..."))
         try:
+            call_command('environs')
+            call_command('all_aliments')
             now = time.localtime()
             when_happens = "{}-{}-{}_{}-{}-{}".format(now[0], now[1], now[2], now[3], now[4], now[5])
             start_time = when_happens
@@ -25,6 +27,7 @@ class Command(BaseCommand):
             print("Opération terminée à : {}".format(when_happens))
             content = log_content(start_time, stop_time, "Mise a jour de la base de donnees")
             log_it(content=content)
+            call_command('all_aliments')
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la mise à jour automatique..."))
