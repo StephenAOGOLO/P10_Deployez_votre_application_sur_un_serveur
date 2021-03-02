@@ -22,7 +22,8 @@ Chaque service remplit une fonction particulière, ce qui les rende complémenta
 
 ## Sentry  
 Sentry est une plateforme web permettant de concentrer et afficher les évènements et erreurs
-prélevés depuis un site web.  
+prélevés depuis un site web. 
+[lien vers Sentry](https://sentry.io/organizations/stephen-aogolo/issues/?project=5631401)
 
 ## Supervisor
 Supervisor permet de centraliser la gestion des processus internes et externes qui sont utiles au
@@ -43,12 +44,18 @@ Ces exécutions sont lancées une fois par semaine, le dimanche à 3 h du matin.
 Pour des raisons de tests, une seconde planification a été enregistrée pour une fréquence élevée : toutes les 10 minutes.
 Cette dernière planification est désactivée lors du fonctionnement nominal du site.
 
-## Gestion de Projet
+# Gestion de Projet
+## Trello
 Ce projet a été mené selon une méthodologie agile.  
 Sa planification est disponible via ce [Trello](https://trello.com/invite/b/WWwBu9OI/e1362a48cbb7a1812f1cb8f9a348c779/p10deployezvotreapplicationsurunserveur)
-# Trello
-En Cours...
 
 # Précision technique 
 Les versions stagging et master ont désormais le même contenu
+
+## Auteur  
+Stephen A.OGOLO  
+
+## Remerciements  
+Merci pour cette lecture et pour l'attention portée à ces informations.  
+Bonne utilisation ;) 
 
