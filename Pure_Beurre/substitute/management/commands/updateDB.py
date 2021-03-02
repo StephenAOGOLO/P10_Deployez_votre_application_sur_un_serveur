@@ -7,6 +7,8 @@ import time, os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Command(BaseCommand):
+    print("\n")
+    print("=" * 150)
     print("Préparation de la mise à jour automatique")
 
     def handle(self, *args, **options):
@@ -25,12 +27,13 @@ class Command(BaseCommand):
             stop_time = when_happens
             print("Fin de la mise à jour cyclique de la base de données...")
             print("Opération terminée à : {}".format(when_happens))
-            content = log_content(start_time, stop_time, "Mise a jour de la base de donnees")
-            log_it(content=content)
+            #content = log_content(start_time, stop_time, "Mise a jour de la base de donnees")
+            #log_it(content=content)
             call_command('all_aliments')
         except Exception as e:
             print(e)
         self.stdout.write(self.style.SUCCESS("Fin de la mise à jour automatique..."))
+        print("=" * 150+"\n")
 
 
 def log_it(path_log="./CRON_LOGS/", filename="cron_event", extension="txt", content=None):
