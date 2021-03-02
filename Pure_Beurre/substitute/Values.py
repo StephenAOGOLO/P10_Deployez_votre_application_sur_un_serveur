@@ -67,7 +67,7 @@ class AlimentValue:
             str_cat = str_cat+" "+e
         an_aliment.category = str_cat
         an_aliment.save()
-        print("Enregistrement de l'aliment :\n{}\n".format(an_aliment))
+        #print("Enregistrement de l'aliment :\n{}\n".format(an_aliment))
         for i, e in enumerate(self.category):
             try:
                 if CategoryDB.objects.get(id_name=e):
@@ -92,7 +92,7 @@ class CategoryValue:
             url=self.url
         )
         a_category.save()
-        print("Enregistrement de la catégorie :\n{}\n".format(a_category))
+        #print("Enregistrement de la catégorie :\n{}\n".format(a_category))
 
 
 class HistoricValue:
@@ -108,4 +108,4 @@ class HistoricValue:
             substitute=self.substitute
         )
         a_historic.save()
-        print("Enregistrement ajouté à l'historique :\n{}\n".format(a_historic.id))
+        #print("Enregistrement ajouté à l'historique :\n{}\n".format(a_historic.id))
