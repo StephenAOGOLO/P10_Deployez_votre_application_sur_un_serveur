@@ -14,7 +14,7 @@ before_script:
   - psql -c 'create database purebeurre;' -U postgres
 branches:
   only:
-    - main
+    - stagging
 services:
   - postgresql
 script:
@@ -23,8 +23,8 @@ script:
   - whereis google-chrome
   - ./Pure_Beurre/manage.py makemigrations
   - ./Pure_Beurre/manage.py migrate
+  - ./Pure_Beurre/manage.py environs
   - ./Pure_Beurre/manage.py tests
-  - ./Pure_Beurre/manage.py crontab add
-  - ./Pure_Beurre/manage.py crontab show
-  - ./Pure_Beurre/manage.py crontab remove
-  - ./Pure_Beurre/manage.py crontab show
+  - ./Pure_Beurre/manage.py all_aliments
+
+

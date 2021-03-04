@@ -14,13 +14,13 @@ class Command(BaseCommand):
     print("\nPréparation de la base de données en cours...\n")
     all_text = Text.objects.all()
     all_text.delete()
-    print("\nTable 'Text' prête.\n")
+    print("\nTable 'Text' prête.")
     all_categories = Category.objects.all()
     all_categories.delete()
-    print("\nTable 'Category' prête.\n")
+    print("\nTable 'Category' prête.")
     all_aliments = Aliment.objects.all()
     all_aliments.delete()
-    print("\nTable 'Aliment' prête.\n")
+    print("\nTable 'Aliment' prête.")
 
     def handle(self, *args, **options):
         """  This method runs the following actions:

@@ -202,11 +202,11 @@ def sort_big_data(big_data):
 
 
 def formatting_data(data):
-    print("\nMise en forme des données collectées..\n")
+    print("\nMise en forme des données collectées...")
     data = formatting_aliments(data)
     data = formatting_categories(data)
     data = cleaning_categories(data)
-    print("\nCollecte et mise en forme des données terminées.\n")
+    print("\nCollecte et mise en forme des données terminées.")
     return data
 
 

@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import Pure_Beurre.the_secrets as tst
-import os
+import os, platform
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
@@ -50,13 +50,13 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_crontab',
     'dbbackup',
     'substitute',
 ]
@@ -66,10 +66,15 @@ DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': BASE_DIR / 'backup/'}
 
 # Cyclic tasks Configurations
+# 00 */2 * * * => At every 2nd hour
+# 0 3 * * 0 => At 03:00 every Sunday
+# */2 * * * * => Every two minutes
+# */10 * * * * => Every ten minutes
 CRONJOBS = [
-    #('0 3 * * 7', 'substitute.cron.weekly_dbupdate'),
-    ('*/2 * * * *', 'substitute.cron.two_minutes_dbupdate')
+    ('0 3 * * 0', 'django.core.management.call_command', ['updateDB']),
+    ('*/10 * * * *', 'django.core.management.call_command', ['updateDB']),
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -115,30 +120,32 @@ if DEBUG:
             'PORT': '5432',
         }
     }
-
-    #DATABASES = {
-    #    'default': {
-    #        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #        'NAME': 'purebeurre',
-    #        'USER': 'purebeurre',
-    #        'PASSWORD': 'purebeurreoc',
-    #        'HOST': 'localhost',
-    #        'PORT': '',
-    #    }
-    #}
 else:
-    # This database configuration is used by Travis
-    DATABASES = {
-        'default': {
-            #'ENGINE': 'django.db.backends.postgresql',
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'purebeurre',
-            'USER': 'postgres',
-            'PASSWORD': '',
-            'HOST': '',
-            'PORT': '',
-        },
-    }
+    if 'travis' in platform.uname().node:
+        # This database configuration is used by Travis
+        DATABASES = {
+            'default': {
+                # 'ENGINE': 'django.db.backends.postgresql',
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'purebeurre',
+                'USER': 'postgres',
+                'PASSWORD': '',
+                'HOST': '',
+                'PORT': '',
+            },
+        }
+    elif platform.uname().node == 'django-s-1vcpu-1gb-lon1-01':
+        # This database configuration is used by Digital Ocean
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'purebeurre',
+                'USER': 'purebeurre',
+                'PASSWORD': 'purebeurreoc',
+                'HOST': 'localhost',
+                'PORT': '',
+            }
+        }
 
 
 # Password validation
